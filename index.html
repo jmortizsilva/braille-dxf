@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Texto a braille en DXF</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="src/pagina/estilos.css">
+  <script type="module" src="src/pagina/pagina.js"></script>
+</head>
+<body>
+  <main>
+    <h1>Texto a braille en DXF</h1>
+
+    <form id="formulario">
+      <label for="texto">Texto</label>
+      <textarea id="texto" rows="4" spellcheck="false"></textarea>
+
+      <label class="casilla">
+        <input type="checkbox" id="mayusculas" checked>
+        Marcar las mayúsculas
+      </label>
+
+      <fieldset>
+        <legend>Medidas en milímetros</legend>
+        <label for="diametro">Diámetro del punto</label>
+        <input type="number" id="diametro" step="0.1" min="0.1" inputmode="decimal">
+        <label for="entrePuntos">Entre puntos</label>
+        <input type="number" id="entrePuntos" step="0.1" min="0.1" inputmode="decimal">
+        <label for="entreCeldas">Entre celdas</label>
+        <input type="number" id="entreCeldas" step="0.1" min="0.1" inputmode="decimal">
+        <label for="entreLineas">Entre líneas</label>
+        <input type="number" id="entreLineas" step="0.1" min="0.1" inputmode="decimal">
+        <button type="button" id="restablecer">Restablecer medidas de la CBE</button>
+      </fieldset>
+
+      <button type="button" id="descargar">Descargar DXF</button>
+    </form>
+
+    <div id="avisos" role="status" aria-live="polite"></div>
+
+    <h2>Braille</h2>
+    <pre id="braille"></pre>
+
+    <h2>Carácter a carácter</h2>
+    <div id="caracteres"></div>
+
+    <section aria-hidden="true">
+      <h2>Vista previa</h2>
+      <div id="vista"></div>
+    </section>
+  </main>
+</body>
+</html>

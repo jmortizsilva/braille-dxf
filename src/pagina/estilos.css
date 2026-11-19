@@ -1,0 +1,106 @@
+body {
+  font-family: system-ui, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: #111;
+  background: #fff;
+  margin: 0;
+}
+
+main {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+label {
+  display: block;
+  margin-top: 0.75rem;
+}
+
+textarea,
+input[type='number'] {
+  font: inherit;
+  padding: 0.25rem 0.5rem;
+  border: 2px solid #555;
+  border-radius: 4px;
+}
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type='number'] {
+  width: 6rem;
+}
+
+.casilla {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+fieldset {
+  margin-top: 1rem;
+  border: 2px solid #555;
+  border-radius: 4px;
+}
+
+button {
+  font: inherit;
+  margin-top: 1rem;
+  padding: 0.4rem 1rem;
+  border: 2px solid #1a4b8c;
+  border-radius: 4px;
+  background: #1a4b8c;
+  color: #fff;
+  cursor: pointer;
+}
+
+fieldset button {
+  display: block;
+  background: #fff;
+  color: #1a4b8c;
+}
+
+:focus-visible {
+  outline: 3px solid #b35900;
+  outline-offset: 2px;
+}
+
+#avisos p {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-left: 4px solid #b35900;
+  background: #fff4e5;
+}
+
+#braille {
+  font-size: 2rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+table {
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+caption {
+  text-align: left;
+  font-weight: bold;
+}
+
+th,
+td {
+  border: 1px solid #999;
+  padding: 0.2rem 0.75rem;
+  text-align: left;
+}
+
+#vista {
+  overflow-x: auto;
+  padding: 0.5rem;
+  border: 1px solid #999;
+}
