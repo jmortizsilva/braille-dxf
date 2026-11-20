@@ -8,8 +8,15 @@ para imprimir en relieve.
   [docs/decisiones-braille.md](docs/decisiones-braille.md).
 - Las medidas de los puntos y las celdas son las del documento técnico B 1 de la CBE, y se
   pueden cambiar en la página.
-- En el DXF, cada punto braille es un círculo en la capa `BRAILLE`, en milímetros. El texto
-  en tinta irá en la capa `TINTA`; todavía no está hecho.
+- En el DXF, en milímetros, el texto en tinta va arriba como contornos vectoriales en la
+  capa `TINTA`, y el braille debajo, un círculo por punto, en la capa `BRAILLE`.
+
+## Lo que viene de fuera
+
+- [opentype.js](https://github.com/opentypejs/opentype.js) 2.0.0, licencia MIT, en
+  `vendor/`: lee la fuente para sacar el contorno de las letras.
+- [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible), del
+  Braille Institute, licencia SIL Open Font License 1.1, en `fuentes/`.
 
 Funciona entero en el navegador, sin servidor. Para probarlo en local hay que servir la
 carpeta con cualquier servidor estático, por ejemplo `python3 -m http.server`, porque los

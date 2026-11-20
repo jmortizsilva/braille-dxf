@@ -29,6 +29,8 @@ test('textos de aviso', () => {
   assert.equal(TEXTOS.brailleCopiado, 'Braille copiado.');
   assert.equal(TEXTOS.sinNadaQueCopiar, 'No hay braille que copiar.');
   assert.equal(TEXTOS.noSePudoCopiar, 'No se ha podido copiar el braille.');
+  assert.equal(TEXTOS.fuenteNoCargada, 'No se ha podido cargar la fuente: el DXF solo lleva el braille.');
+  assert.equal(TEXTOS.sinLetra(['☃']), 'Sin letra en la fuente: ☃.');
 });
 
 test('nombre del fichero', () => {

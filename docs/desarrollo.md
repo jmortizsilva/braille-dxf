@@ -23,3 +23,9 @@ node herramientas/generar-muestra.mjs "Texto de prueba" /tmp
 ```
 
 Tiene que decir «errores 0». El PNG es el dibujo tal como lo interpreta ezdxf.
+
+## Actualizar opentype.js
+
+Se copia `dist/opentype.min.mjs` del paquete de npm a `vendor/opentype.js-<versión>/`, junto
+con su licencia, después de comprobar que la suma del paquete coincide con la que publica
+npm (`npm view opentype.js@<versión> dist.integrity`).

@@ -22,7 +22,15 @@
       </label>
 
       <fieldset>
-        <legend>Medidas en milímetros</legend>
+        <legend>Medidas de la tinta en milímetros</legend>
+        <label for="alturaMayusculas">Altura de las mayúsculas</label>
+        <input type="number" id="alturaMayusculas" step="0.5" min="0.5" inputmode="decimal">
+        <label for="separacion">Separación con el braille</label>
+        <input type="number" id="separacion" step="0.5" min="0" inputmode="decimal">
+      </fieldset>
+
+      <fieldset>
+        <legend>Medidas del braille en milímetros</legend>
         <label for="diametro">Diámetro del punto</label>
         <input type="number" id="diametro" step="0.1" min="0.1" inputmode="decimal">
         <label for="entrePuntos">Entre puntos</label>

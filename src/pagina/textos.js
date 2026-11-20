@@ -8,6 +8,8 @@ export const TEXTOS = {
   sinNadaQueCopiar: 'No hay braille que copiar.',
   brailleCopiado: 'Braille copiado.',
   noSePudoCopiar: 'No se ha podido copiar el braille.',
+  fuenteNoCargada: 'No se ha podido cargar la fuente: el DXF solo lleva el braille.',
+  sinLetra: (caracteres) => `Sin letra en la fuente: ${caracteres.join(', ')}.`,
   sinSigno: (caracteres) => `Sin signo braille: ${caracteres.join(', ')}.`,
   linea: (n) => `Línea ${n}`,
 };
