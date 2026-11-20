@@ -121,7 +121,7 @@ function descargar() {
   const blob = new Blob([generarDxf(rotuloActual.dibujo)], { type: 'application/dxf' });
   const enlace = document.createElement('a');
   enlace.href = URL.createObjectURL(blob);
-  enlace.download = nombreDeFichero($('texto').value);
+  enlace.download = nombreDeFichero($('texto').value, { relleno: rotuloActual.dibujo.formato === 'R2000' });
   enlace.click();
   setTimeout(() => URL.revokeObjectURL(enlace.href), 1000);
 }

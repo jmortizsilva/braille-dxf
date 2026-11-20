@@ -39,4 +39,6 @@ test('nombre del fichero', () => {
   assert.equal(nombreDeFichero('☃'), 'braille.dxf');
   assert.equal(nombreDeFichero('Señalización'), 'braille-señalización.dxf');
   assert.equal(nombreDeFichero('Año\nPB'), 'braille-año-pb.dxf');
+  assert.equal(nombreDeFichero('Planta 2.ª', { relleno: true }), 'braille-planta-2-relleno.dxf');
+  assert.equal(nombreDeFichero('☃', { relleno: true }), 'braille-relleno.dxf');
 });

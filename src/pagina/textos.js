@@ -33,7 +33,7 @@ export function describirTinta(segmento) {
  * «braille-planta-2.dxf»: el principio del texto, sin signos. Las tildes y las eñes se
  * quedan: quitarlas convierte «Año» en otra palabra.
  */
-export function nombreDeFichero(texto) {
+export function nombreDeFichero(texto, { relleno = false } = {}) {
   const palabras = texto
     .toLowerCase()
     .split(/[^\p{L}\p{N}]+|[ºª]/u)
@@ -44,5 +44,6 @@ export function nombreDeFichero(texto) {
     if (Array.from(siguiente).length > 30) break;
     base = siguiente;
   }
-  return `braille${base ? `-${base}` : ''}.dxf`;
+  // Con relleno el nombre cambia, para que al bajar las dos versiones no se pisen.
+  return `braille${base ? `-${base}` : ''}${relleno ? '-relleno' : ''}.dxf`;
 }
