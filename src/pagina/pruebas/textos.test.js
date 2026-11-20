@@ -26,6 +26,9 @@ test('espacio, separación añadida y caracteres sin signo', () => {
 test('textos de aviso', () => {
   assert.equal(TEXTOS.sinSigno(['☃', '✓']), 'Sin signo braille: ☃, ✓.');
   assert.equal(TEXTOS.linea(2), 'Línea 2');
+  assert.equal(TEXTOS.brailleCopiado, 'Braille copiado.');
+  assert.equal(TEXTOS.sinNadaQueCopiar, 'No hay braille que copiar.');
+  assert.equal(TEXTOS.noSePudoCopiar, 'No se ha podido copiar el braille.');
 });
 
 test('nombre del fichero', () => {

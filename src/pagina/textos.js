@@ -5,6 +5,9 @@ import { puntosDeCelda } from '../braille/celda.js';
 
 export const TEXTOS = {
   sinNadaQueDescargar: 'No hay braille que descargar.',
+  sinNadaQueCopiar: 'No hay braille que copiar.',
+  brailleCopiado: 'Braille copiado.',
+  noSePudoCopiar: 'No se ha podido copiar el braille.',
   sinSigno: (caracteres) => `Sin signo braille: ${caracteres.join(', ')}.`,
   linea: (n) => `Línea ${n}`,
 };

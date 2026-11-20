@@ -110,6 +110,32 @@ function descargar() {
   setTimeout(() => URL.revokeObjectURL(enlace.href), 1000);
 }
 
+/**
+ * Copia el braille Unicode tal como se ve, con un salto por línea. Las celdas en blanco
+ * son U+2800, no espacios: así se conservan al pegarlo en otro sitio.
+ */
+async function copiar() {
+  const braille = $('braille').textContent;
+  let mensaje;
+  if (!braille.replace(/[\u2800\n]/g, '')) {
+    mensaje = TEXTOS.sinNadaQueCopiar;
+  } else {
+    try {
+      await navigator.clipboard.writeText(braille);
+      mensaje = TEXTOS.brailleCopiado;
+    } catch {
+      // El portapapeles solo funciona en https o en localhost, y el navegador puede negarlo.
+      mensaje = TEXTOS.noSePudoCopiar;
+    }
+  }
+  // Se vacía antes de escribir para que el lector lo anuncie aunque se repita el mensaje.
+  const estado = $('estado-copia');
+  estado.textContent = '';
+  setTimeout(() => {
+    estado.textContent = mensaje;
+  }, 50);
+}
+
 let espera;
 const actualizarEnUnMomento = () => {
   clearTimeout(espera);
@@ -125,4 +151,5 @@ $('restablecer').addEventListener('click', () => {
   actualizar();
 });
 $('descargar').addEventListener('click', descargar);
+$('copiar').addEventListener('click', copiar);
 actualizar();
