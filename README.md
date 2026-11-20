@@ -10,6 +10,8 @@ para imprimir en relieve.
   pueden cambiar en la página.
 - En el DXF, en milímetros, el texto en tinta va arriba como contornos vectoriales en la
   capa `TINTA`, y el braille debajo, un círculo por punto, en la capa `BRAILLE`.
+- Los puntos pueden ir solo con contorno (DXF R12) o con relleno sólido (DXF R2000, porque
+  R12 no admite rellenos).
 
 ## Lo que viene de fuera
 

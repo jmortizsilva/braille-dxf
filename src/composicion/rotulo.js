@@ -37,6 +37,7 @@ export function comprobarTinta({ alturaMayusculas, separacion }) {
  *   mayusculas?: boolean,
  *   fuente?: object,  fuente de opentype.js; sin ella no se genera la tinta
  *   tinta?: typeof TINTA_POR_DEFECTO,
+ *   rellenoPuntos?: boolean,  puntos con relleno sólido; obliga a escribir el DXF en R2000
  * }} [opciones]
  */
 export function componerRotulo(
@@ -46,6 +47,7 @@ export function componerRotulo(
     mayusculas = true,
     fuente = null,
     tinta = TINTA_POR_DEFECTO,
+    rellenoPuntos = false,
   } = {},
 ) {
   const transcripcion = transcribir(texto, { mayusculas });
@@ -77,6 +79,7 @@ export function componerRotulo(
       x: p.x,
       y: alto - p.y,
       radio: p.radio,
+      ...(rellenoPuntos ? { relleno: true } : {}),
     })),
   ];
 
@@ -90,6 +93,6 @@ export function componerRotulo(
     contornosTinta: textoEnTinta.contornos,
     ancho,
     alto,
-    dibujo: { capas: [CAPA_TINTA, CAPA_BRAILLE], entidades },
+    dibujo: { capas: [CAPA_TINTA, CAPA_BRAILLE], entidades, formato: rellenoPuntos ? 'R2000' : 'R12' },
   };
 }

@@ -90,6 +90,7 @@ function actualizar() {
     mayusculas: $('mayusculas').checked,
     fuente,
     tinta,
+    rellenoPuntos: document.querySelector('input[name="puntos"]:checked').value === 'relleno',
   });
   rotuloActual = rotulo;
   const { lineas, desconocidos } = rotulo.transcripcion;

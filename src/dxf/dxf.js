@@ -1,29 +1,34 @@
-// Escritor de DXF en formato R12 (AC1009), en milímetros y con el eje Y hacia arriba.
+// Escritor de DXF, en milímetros y con el eje Y hacia arriba.
 //
-// Se usa R12 porque es el formato que acepta casi cualquier programa y no necesita
-// identificadores de objeto ni sección OBJECTS. No admite HATCH (relleno sólido): si
-// hiciera falta, hay que pasar a R2000 (AC1015).
+// Por defecto escribe R12 (AC1009), el formato que acepta casi cualquier programa y que no
+// necesita identificadores de objeto ni sección OBJECTS. R12 no admite HATCH (relleno
+// sólido): los puntos con relleno se escriben en R2000, en dxf-r2000.js.
 // Referencia de códigos de grupo: «DXF Reference» de Autodesk.
 
-const SALTO = '\r\n';
+import { generarDxfR2000 } from './dxf-r2000.js';
+import { num, extension } from './comun.js';
 
-/** Número sin notación exponencial y con cuatro decimales como mucho. */
-const num = (n) => {
-  if (!Number.isFinite(n)) throw new Error(`Coordenada no válida en el DXF: ${n}`);
-  const texto = String(Number(n.toFixed(4)));
-  return texto === '-0' ? '0' : texto;
-};
+const SALTO = '\r\n';
 
 const NOMBRE_DE_CAPA_VALIDO = /^[A-Z0-9_$-]+$/;
 
 /**
  * @typedef {{ nombre: string, color: number }} Capa  color: índice de color ACI (1 a 255)
- * @typedef {{ capa: string, tipo: 'circulo', x: number, y: number, radio: number }} Circulo
+ * @typedef {{ capa: string, tipo: 'circulo', x: number, y: number, radio: number, relleno?: boolean }} Circulo
  * @typedef {{ capa: string, tipo: 'polilinea', vertices: [number, number][], cerrada?: boolean }} Polilinea
- * @param {{ capas: Capa[], entidades: (Circulo | Polilinea)[] }} dibujo
+ * @param {{ capas: Capa[], entidades: (Circulo | Polilinea)[], formato?: 'R12' | 'R2000' }} dibujo
  * @returns {string}
  */
-export function generarDxf({ capas, entidades }) {
+export function generarDxf(dibujo) {
+  comprobarDibujo(dibujo);
+  if (dibujo.formato === 'R2000') return generarDxfR2000(dibujo);
+  if (dibujo.entidades.some((e) => e.relleno)) {
+    throw new Error('El relleno de los círculos necesita el formato R2000.');
+  }
+  return generarDxfR12(dibujo);
+}
+
+function comprobarDibujo({ capas, entidades }) {
   for (const capa of capas) {
     if (!NOMBRE_DE_CAPA_VALIDO.test(capa.nombre)) {
       throw new Error(`Nombre de capa no válido para DXF R12: ${capa.nombre}`);
@@ -33,7 +38,9 @@ export function generarDxf({ capas, entidades }) {
   for (const e of entidades) {
     if (!nombres.has(e.capa)) throw new Error(`Entidad en una capa que no existe: ${e.capa}`);
   }
+}
 
+function generarDxfR12({ capas, entidades }) {
   const g = [];
   const par = (codigo, valor) => g.push(String(codigo), String(valor));
   const { min, max } = extension(entidades);
@@ -117,25 +124,4 @@ export function generarDxf({ capas, entidades }) {
   par(0, 'EOF');
 
   return g.join(SALTO) + SALTO;
-}
-
-function extension(entidades) {
-  const min = [Infinity, Infinity];
-  const max = [-Infinity, -Infinity];
-  const incluir = (x, y) => {
-    min[0] = Math.min(min[0], x);
-    min[1] = Math.min(min[1], y);
-    max[0] = Math.max(max[0], x);
-    max[1] = Math.max(max[1], y);
-  };
-  for (const e of entidades) {
-    if (e.tipo === 'circulo') {
-      incluir(e.x - e.radio, e.y - e.radio);
-      incluir(e.x + e.radio, e.y + e.radio);
-    } else {
-      e.vertices.forEach(([x, y]) => incluir(x, y));
-    }
-  }
-  if (min[0] === Infinity) return { min: [0, 0], max: [0, 0] };
-  return { min, max };
 }

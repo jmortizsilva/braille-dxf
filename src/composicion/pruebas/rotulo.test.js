@@ -74,3 +74,12 @@ test('comprobar las medidas de la tinta', () => {
     'Falta la separación con el braille, o no es válida.',
   ]);
 });
+
+test('con relleno, los círculos lo llevan y el DXF pasa a R2000', () => {
+  const sin = componerRotulo('a');
+  const con = componerRotulo('a', { rellenoPuntos: true });
+  assert.equal(sin.dibujo.formato, 'R12');
+  assert.equal(con.dibujo.formato, 'R2000');
+  assert.equal(con.dibujo.entidades[0].relleno, true);
+  assert.equal(sin.dibujo.entidades[0].relleno, undefined);
+});
